@@ -1,0 +1,14 @@
+﻿Two Q Alliance Software Developer (Laravel) Preliminary Assessment
+Basically, a project to manage companies.
+* Basic Laravel Authentication: ability to log in as administrator (register functionality is not needed)
+* Use database seeds to create first user with email admin@admin.com and password "password"
+* CRUD functionality (Create / Read / Update / Delete) for Companies.
+* Companies DB table consists of these fields: Name (required), email, logo (minimum 100x100), website link
+* Use Laravel migrations to create those schemas above
+* Store companies logos in storage/app/public folder and make them accessible from public
+* Make sure companies are unique (eg: unique email, unique website)
+* Use basic Laravel resource controllers with default methods - index, create, store etc.
+* Use Laravel's validation function
+* Any template/front-end libraries is up to your creativity and knowledge. 
+* Please use only laravel or/with livewire. Once you have completed, you may send us your GitLab/GitHub link of your assessment.
+In general, your interface may look like this.

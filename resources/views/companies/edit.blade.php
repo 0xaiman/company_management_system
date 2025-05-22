@@ -1,9 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">Edit Company</h2>
-    </x-slot>
 
-    <div class="p-6 w-full xl:w-2/3 mx-auto">
+    <div class="p-6 ">
 
         <div class="flex justify-start mb-4 gap-4 ">
             <a href="{{ route('companies.index') }}" class="bg-gray-400 text-white p-2 rounded-md hover:bg-gray-600">&larr; Back</a>
@@ -55,7 +52,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-1">Logo Preview</label>
                     <img src="{{ Str::startsWith($company->logo, 'http') ? $company->logo : asset('storage/' . $company->logo) }}" 
                          alt="Company Logo" 
-                         class="max-w-xs max-h-48 rounded-md shadow-md border border-gray-300">
+                         class="max-w-xs max-h-24 rounded-md shadow-md border border-gray-300">
                 </div>
         
                 <div class="flex flex-col justify-center">
@@ -74,6 +71,10 @@
         
 
             <div class="flex justify-start mb-4 gap-4 col-span-2">
+                <button type="submit" 
+                        class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    Cancel
+                </button>
                 <button type="submit" 
                         class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
                     Update Company

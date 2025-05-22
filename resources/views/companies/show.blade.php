@@ -1,12 +1,14 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">View Company</h2>
-    </x-slot>
+   
 
-    <div class="p-6 w-full xl:w-2/3 mx-auto">
+    <div class="p-6 ">
 
-        <div class="flex justify-start mb-4 gap-4 ">
+        <div class="flex justify-between mb-4 gap-4 ">
             <a href="{{ route('companies.index') }}" class=" bg-gray-400 text-white p-2 rounded-md hover:bg-gray-600">&larr; Back</a>
+            <a href="{{ route('companies.edit', $company) }}" 
+            class="bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+             Edit Company
+         </a>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-2 gap-6 ">
@@ -46,16 +48,11 @@
                     <label class="block text-sm font-medium text-gray-700 mb-1">Logo Preview</label>
                     <img src="{{ Str::startsWith($company->logo, 'http') ? $company->logo : asset('storage/' . $company->logo) }}" 
                          alt="Company Logo" 
-                         class="max-w-xs max-h-48 rounded-md shadow-md border border-gray-300">
+                         class="max-w-xs max-h-24 rounded-md shadow-md border border-gray-300">
                 </div>
             @endif
 
-            <div class="flex justify-start mb-4 gap-4 col-span-2">
-                <a href="{{ route('companies.edit', $company) }}" 
-                   class="bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    Edit Company
-                </a>
-            </div>
+           
 
         </div>
     </div>

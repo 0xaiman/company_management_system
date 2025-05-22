@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800">Create Company</h2>
     </x-slot>
 
-    <div class="p-6 w-full xl:w-2/3 mx-auto">
+    <div class="p-6 ">
 
         <div class="flex justify-start mb-4 gap-4 ">
             <a href="{{ route('companies.index') }}" class=" bg-gray-400 text-white p-2 rounded-md hover:bg-gray-600">&larr; Back</a>

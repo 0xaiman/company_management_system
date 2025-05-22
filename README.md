@@ -42,6 +42,22 @@ A simple Laravel project to manage companies with basic admin authentication and
     ```
     Visit [http://localhost:8000](http://localhost:8000) and log in as admin.
 
+## 🔧 Troubleshooting
+
+### MySQL Collation Issues
+
+If you encounter MySQL collation errors during migration, update the collation in `config/database.php`:
+
+```php
+'mysql' => [
+    // ... other config ...
+    'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+    // ... other config ...
+]
+```
+
+This ensures compatibility with MySQL 5.7 and older versions.
+
 ---
 
 **Demo Admin:**

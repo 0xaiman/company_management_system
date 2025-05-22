@@ -15,7 +15,7 @@ A simple Laravel project to manage companies with basic admin authentication and
 
     ```bash
     git clone https://github.com/0xaiman/company_management_system.git
-    cd twoq-assessment
+    cd company_management_system
     composer install
     npm install && npm run dev
     ```

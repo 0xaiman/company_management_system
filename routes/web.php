@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('companies', CompanyController::class);
+    Route::delete('/companies/{company}/remove-logo', [CompanyController::class, 'removeLogo'])->name('companies.removeLogo');
+
 });
 
 require __DIR__.'/auth.php';

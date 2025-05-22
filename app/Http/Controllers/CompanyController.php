@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class CompanyController extends Controller
 {
@@ -30,8 +32,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
+        $validated = $request->validate([
+            'name' => 'required|unique:companies',
             'email' => 'required|email|unique:companies',
             'website_url' => 'required|url',
             'logo' => 'nullable|image|dimensions:min_width=100,min_height=100',
@@ -51,7 +53,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view('companies.show', compact('company'));
+
     }
 
     /**
@@ -59,7 +62,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view('companies.edit', compact('company'));
+
     }
 
     /**
@@ -67,14 +71,56 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:companies,email,' . $company->id,
+            'website_url' => 'required|url',
+            'logo' => 'nullable|image|dimensions:min_width=100,min_height=100',
+            'remove_logo' => 'nullable|boolean',
+        ]);
+    
+        if ($request->has('remove_logo') && $request->boolean('remove_logo')) {
+            if ($company->logo && !Str::startsWith($company->logo, 'http')) {
+                $oldLogoPath = storage_path('app/public/' . $company->logo);
+                if (file_exists($oldLogoPath)) {
+                    unlink($oldLogoPath);
+                }
+            }
+            $validated['logo'] = null; 
+        }
+    
+        if ($request->hasFile('logo')) {
+            if ($company->logo && !Str::startsWith($company->logo, 'http')) {
+                $oldLogoPath = storage_path('app/public/' . $company->logo);
+                if (file_exists($oldLogoPath)) {
+                    unlink($oldLogoPath);
+                }
+            }
+            $validated['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+    
+        $company->update($validated);
+    
+        return redirect()->route('companies.index')->with('success', 'Company updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Company $company)
     {
-        //
+        if ($company->logo && !Str::startsWith($company->logo, 'http')) {
+        $logoPath = storage_path('app/public/' . $company->logo);
+        if (file_exists($logoPath)) {
+            unlink($logoPath);
+        }
     }
+
+    $company->delete();
+
+    return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
+        
+    }
+
 }

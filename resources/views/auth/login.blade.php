@@ -44,4 +44,8 @@
             </x-primary-button>
         </div>
     </form>
+<p class="text-xs text-gray-600">*demo account: admin@admin.com / password</p>
+
+
 </x-guest-layout>
+
